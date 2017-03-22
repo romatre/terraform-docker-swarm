@@ -1,0 +1,7 @@
+*.tfvars
+*.tfstate
+*.tfbackup
+
+resources/ssh_keys/*
+join-manager.sh
+join-worker.sh
