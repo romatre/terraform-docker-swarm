@@ -1,0 +1,39 @@
+# VSPHERE SETTINGS
+vsphere = {
+  USER = "vsphereuser"
+  PASSWORD = "vspherepassword"
+  SERVER = "vspherehost"
+  FOLDER = "docker-swarm"
+  DATACENTER = "INFORMATICA"
+  DEFAULT_GATEWAY = "192.168.127.1"
+  SSH_USER = "root"
+  SSH_KEY = "resources/ssh_keys/vsphere.pem"
+}
+
+# MANAGERS SETTINGS
+manager_number = 3
+manager_hardware = {
+  VCPU = 2
+  MEMORY = 4096
+  DATASTORE = "storage-normal"
+  TEMPLATE = "docker-swarm/TEMPLATE"
+}
+manager_ipv4 = {
+  "0" = "192.168.127.81",
+  "1" = "192.168.127.82",
+  "2" = "192.168.127.83"
+}
+
+# WORKER SETTINGS
+worker_number = 3
+worker_hardware = {
+  VCPU = 2
+  MEMORY = 4096
+  DATASTORE = "storage-normal"
+  TEMPLATE = "docker-swarm/TEMPLATE"
+}
+worker_ipv4 = {
+  "0" = "192.168.127.84",
+  "1" = "192.168.127.85",
+  "2" = "192.168.127.86"
+}
