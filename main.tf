@@ -39,6 +39,7 @@ resource "vsphere_virtual_machine" "swarm-manager" {
   network_interface {
     label = "VM Network"
     ipv4_address = "${lookup(var.manager_ipv4, count.index)}"
+    mac_address = "${lookup(var.manager_macaddress, count.index)}"
     ipv4_prefix_length = "24"
     ipv4_gateway = "${var.vsphere.["DEFAULT_GATEWAY"]}"
   }
@@ -100,6 +101,7 @@ resource "vsphere_virtual_machine" "swarm-worker" {
   network_interface {
     label = "VM Network"
     ipv4_address = "${lookup(var.worker_ipv4, count.index)}"
+    mac_address = "${lookup(var.worker_macaddress, count.index)}"
     ipv4_prefix_length = "24"
     ipv4_gateway = "${var.vsphere.["DEFAULT_GATEWAY"]}"
   }

@@ -21,6 +21,10 @@ variable "manager_ipv4" {
   type = "map"
 }
 
+variable "manager_macaddress" {
+  type = "map"
+}
+
 variable "worker_hardware" {
   type = "map"
   default = {
@@ -35,5 +39,9 @@ variable "worker_number" {
 }
 
 variable "worker_ipv4" {
+  type = "map"
+}
+
+variable "worker_macaddress" {
   type = "map"
 }

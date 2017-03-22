@@ -2,6 +2,7 @@
 *.tfstate
 *.tfbackup
 *.backup
+*.lock.info
 
 resources/ssh_keys/*
 resources/certs
