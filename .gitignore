@@ -1,8 +1,10 @@
 *.tfvars
 *.tfstate
 *.tfbackup
+*.backup
 
 resources/ssh_keys/*
+resources/certs
 join-manager.sh
 join-worker.sh
 

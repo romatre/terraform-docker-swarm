@@ -13,7 +13,7 @@ resource "null_resource" "generate-certs-manager" {
 }
 
 resource "null_resource" "generate-certs-worker" {
-  count = "${var.manager_number}"
+  count = "${var.worker_number}"
   provisioner "local-exec" {
     command = "docker run --rm -e SSL_IP=${lookup(var.worker_ipv4, count.index)} -e SSL_DNS=swarm-worker-${count.index} -v $(pwd)/resources/certs/swarm-worker-${count.index}:/certs paulczar/omgwtfssl"
   }
