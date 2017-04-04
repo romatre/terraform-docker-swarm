@@ -26,7 +26,7 @@ resource "null_resource" "boot-vm_docker" {
 
   provisioner "file" {
     source      = "${var.path_certs}/certs/"
-    destination = "/home/root/.docker"
+    destination = "/root/.docker"
   }
 
   provisioner "remote-exec" {
