@@ -1,50 +1,52 @@
 # VSPHERE SETTINGS
 vsphere = {
-  USER = "vsphereuser"
-  PASSWORD = "vspherepassword"
-  SERVER = "vspherehost"
-  FOLDER = "docker-swarm"
-  DATACENTER = "INFORMATICA"
-  DEFAULT_GATEWAY = "192.168.127.1"
-  SSH_USER = "root"
+  USER = ""
+  PASSWORD = ""
+  SERVER = ""
+  SSH_USER = ""
   SSH_KEY = "resources/ssh_keys/vsphere.pem"
 }
 
-# MANAGERS SETTINGS
-manager_number = 3
-manager_hardware = {
-  VCPU = 2
-  MEMORY = 4096
+# DOCKER HOST AND CERTS
+host_cluster = "cluster.inf.uniroma3.it"
+path_certs = "resources/certs"
+
+# VM HARDWARE SETTINGS
+vm_worker = {
+  FOLDER = ""
+  DEFAULT_GATEWAY = ""
+  DATACENTER = ""
   DATASTORE = "storage-normal"
   TEMPLATE = "docker-swarm/TEMPLATE"
 }
-manager_ipv4 = {
-  "0" = "192.168.127.81",
-  "1" = "192.168.127.82",
-  "2" = "192.168.127.83"
-}
-manager_macaddress = {
-  "0" = "00:50:56:aa:32:9c",
-  "1" = "00:50:56:aa:33:9c",
-  "2" = "00:50:56:aa:34:9c",
-}
-
-
-# WORKER SETTINGS
-worker_number = 3
-worker_hardware = {
-  VCPU = 2
-  MEMORY = 4096
+vm_manager = {
+  FOLDER = ""
+  DEFAULT_GATEWAY = ""
+  DATACENTER = ""
   DATASTORE = "storage-normal"
   TEMPLATE = "docker-swarm/TEMPLATE"
 }
-worker_ipv4 = {
-  "0" = "192.168.127.84",
-  "1" = "192.168.127.85",
-  "2" = "192.168.127.86"
-}
-worker_macaddress = {
-  "0" = "00:50:56:aa:35:8c",
-  "1" = "00:50:56:aa:36:8c",
-  "2" = "00:50:56:aa:37:8c",
-}
+
+# VM IPV4 ADDRESS
+IPV4_ADDRESS_manager = [
+  "192.178.161.168",
+  "192.188.161.169",
+  "192.128.161.170",
+]
+IPV4_ADDRESS_worker = [
+  "192.138.161.171",
+  "192.148.161.172",
+  "192.118.161.173",
+]
+
+# VM MAC ADDRESS
+MAC_ADDRESS_manager = [
+  "10:53:56:ab:34:9a",
+  "20:11:56:aa:35:9b",
+  "30:20:56:aa:36:9c",
+]
+MAC_ADDRESS_worker = [
+  "10:50:56:ac:37:9d",
+  "20:40:56:aa:39:9e",
+  "30:60:56:aa:39:9f",
+]

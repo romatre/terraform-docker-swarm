@@ -4,10 +4,6 @@
 *.backup
 *.lock.info
 
-resources/ssh_keys/*
-resources/certs
-join-manager.sh
-join-worker.sh
-
+resources
 .DS_Store
 .idea

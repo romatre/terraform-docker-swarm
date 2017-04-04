@@ -1,9 +1,5 @@
 variable "vsphere" {
   type = "map"
-
-  default = {
-    UNVERIFIED_SSL = true
-  }
 }
 
 variable "vm_manager" {
@@ -30,10 +26,6 @@ variable "host_cluster" {
   type = "string"
 }
 
-variable "path_certs" {
-  type = "string"
-}
-
 variable "name_manager" {
   type    = "string"
   default = "manager"
@@ -41,18 +33,22 @@ variable "name_manager" {
 
 variable "name_worker" {
   type    = "string"
-  default = "worker"
+  default = "manager"
+}
+
+variable "path_certs" {
+  type = "string"
 }
 
 variable "IPV4_ADDRESS_manager" {
   type = "list"
 }
 
-variable "MAC_ADDRESS_manager" {
+variable "IPV4_ADDRESS_worker" {
   type = "list"
 }
 
-variable "IPV4_ADDRESS_worker" {
+variable "MAC_ADDRESS_manager" {
   type = "list"
 }
 

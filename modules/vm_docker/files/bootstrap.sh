@@ -8,7 +8,6 @@ apt-get install software-properties-common
 add-apt-repository "deb https://apt.dockerproject.org/repo/ ubuntu-$(lsb_release -cs) main"
 apt-get update
 apt-get -y install docker-engine
-groupadd docker
-usermod -aG docker docker
-mkdir -p /etc/systemd/system/docker.service.d/
-mkdir -p /etc/docker/certs/
+systemctl daemon-reload
+systemctl enable docker
+systemctl restart docker
