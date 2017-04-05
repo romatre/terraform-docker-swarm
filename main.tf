@@ -2,7 +2,7 @@ module "cluster" {
   source = "modules/cluster"
 
   vsphere      = "${var.vsphere}"
-  host_cluster = "${var.host_cluster}"
+  host_cluster = "${element(var.IPV4_ADDRESS_manager, 0)}"
   path_certs   = "${var.path_certs}"
 
   vm_manager = "${var.vm_manager}"

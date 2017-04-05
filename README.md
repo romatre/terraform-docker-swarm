@@ -12,7 +12,7 @@ ssh-keygen -t rsa -b 4096 -C "docker@vsphere" -f resources/ssh_keys/vsphere
 ## Generazione certificati
 Occorrerà anche generare i certificati SSL.
 ```
-docker run --rm -e SSL_DNS=cluster.inf.uniroma3.it -v $(pwd)/resources/certs/:/certs paulczar/omgwtfssl
+docker run --rm -e SSL_IP=192.168.161.168 -v $(pwd)/resources/certs/:/certs paulczar/omgwtfssl
 ```
 
 ## Configurazione

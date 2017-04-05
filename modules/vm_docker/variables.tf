@@ -12,13 +12,13 @@ variable "vm" {
   }
 }
 
+variable "path_certs" {
+  type = "string"
+}
+
 variable "name" {
   type    = "string"
   default = "docker"
-}
-
-variable "path_certs" {
-  type = "string"
 }
 
 variable "IPV4_ADDRESS" {

@@ -41,47 +41,9 @@ resource "null_resource" "init" {
   }
 }
 
-# add cluster host to managers
-resource "null_resource" "add_cluster_host_manager" {
-  depends_on = ["module.manager"]
-
-  count = "${length(var.IPV4_ADDRESS_manager)}"
-
-  connection {
-    user        = "${var.vsphere["SSH_USER"]}"
-    private_key = "${file("${var.vsphere["SSH_KEY"]}")}"
-    host        = "${element(var.IPV4_ADDRESS_manager, count.index)}"
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "echo \"${element(var.IPV4_ADDRESS_manager, count.index)}  ${var.host_cluster}\" >> /etc/hosts",
-    ]
-  }
-}
-
-# add cluster host to workers
-resource "null_resource" "add_cluster_host_worker" {
-  depends_on = ["module.manager"]
-
-  count = "${length(var.IPV4_ADDRESS_worker)}"
-
-  connection {
-    user        = "${var.vsphere["SSH_USER"]}"
-    private_key = "${file("${var.vsphere["SSH_KEY"]}")}"
-    host        = "${element(var.IPV4_ADDRESS_worker, count.index)}"
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "echo \"${element(var.IPV4_ADDRESS_worker, count.index)}  ${var.host_cluster}\" >> /etc/hosts",
-    ]
-  }
-}
-
 # the managers join the cluster
 resource "null_resource" "join_manager" {
-  depends_on = ["null_resource.init", "null_resource.add_cluster_host_manager"]
+  depends_on = ["module.manager", "null_resource.init"]
 
   count = "${length(var.IPV4_ADDRESS_manager) - 1}"
 
@@ -93,24 +55,26 @@ resource "null_resource" "join_manager" {
 
   provisioner "remote-exec" {
     inline = [
-      "docker swarm join --token $(docker -H tcp://${var.host_cluster}:2377 --tlsverify swarm join-token -q manager)",
+      "export DOCKER_CERT_PATH=/root/.docker",
+      "docker swarm join --token $(docker -H tcp://${var.host_cluster}:2376 --tlsverify swarm join-token -q manager) ${var.host_cluster}:2377",
     ]
   }
 }
 
 # the workers join the cluster
 resource "null_resource" "join_worker" {
-  depends_on = ["module.worker", "null_resource.add_cluster_host_worker"]
+  depends_on = ["module.worker", "null_resource.init"]
 
   connection {
     user        = "${var.vsphere["SSH_USER"]}"
     private_key = "${file("${var.vsphere["SSH_KEY"]}")}"
-    host        = "${element(var.IPV4_ADDRESS_worker, 0)}"
+    host        = "${element(var.IPV4_ADDRESS_worker, count.index)}"
   }
 
   provisioner "remote-exec" {
     inline = [
-      "docker swarm join --token $(docker -H tcp://${var.host_cluster}:2377 --tlsverify swarm join-token -q worker)",
+      "export DOCKER_CERT_PATH=/root/.docker",
+      "docker swarm join --token $(docker -H tcp://${var.host_cluster}:2376 --tlsverify swarm join-token -q worker) ${var.host_cluster}:2377",
     ]
   }
 }

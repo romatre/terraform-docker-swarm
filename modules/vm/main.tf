@@ -13,12 +13,6 @@ resource "vsphere_virtual_machine" "vm" {
   vcpu       = "${var.vm["VCPU"]}"
   memory     = "${var.vm["MEMORY"]}"
 
-  connection {
-    user        = "${var.vm["SSH_USER"]}"
-    private_key = "${file("${var.vm["SSH_KEY"]}")}"
-    host        = "${var.vm["HOST"]}"
-  }
-
   network_interface {
     label              = "VM Network"
     ipv4_address       = "${element(var.IPV4_ADDRESS, count.index)}"

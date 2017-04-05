@@ -24,12 +24,19 @@ resource "null_resource" "boot-vm_docker" {
     destination = "/etc/systemd/system"
   }
 
+  provisioner "remote-exec" {
+    inline = [
+      "mkdir -p /root/.docker",
+    ]
+  }
+
   provisioner "file" {
-    source      = "${var.path_certs}/certs/"
+    source      = "${var.path_certs}/"
     destination = "/root/.docker"
   }
 
   provisioner "remote-exec" {
     script = "${path.module}/files/bootstrap.sh"
   }
+
 }
