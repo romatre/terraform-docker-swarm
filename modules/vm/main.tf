@@ -12,11 +12,11 @@ resource "vsphere_virtual_machine" "vm" {
   datacenter = "${var.vm["DATACENTER"]}"
   vcpu       = "${var.vm["VCPU"]}"
   memory     = "${var.vm["MEMORY"]}"
+  domain     = "docker-swarm"
 
   network_interface {
     label              = "VM Network"
     ipv4_address       = "${element(var.IPV4_ADDRESS, count.index)}"
-    mac_address        = "${element(var.MAC_ADDRESS, count.index)}"
     ipv4_prefix_length = "24"
     ipv4_gateway       = "${var.vm["DEFAULT_GATEWAY"]}"
   }

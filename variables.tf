@@ -26,7 +26,7 @@ variable "vm_worker" {
   }
 }
 
-variable "host_cluster" {
+variable "domain_cluster" {
   type = "string"
 }
 
@@ -48,14 +48,6 @@ variable "IPV4_ADDRESS_manager" {
   type = "list"
 }
 
-variable "MAC_ADDRESS_manager" {
-  type = "list"
-}
-
 variable "IPV4_ADDRESS_worker" {
-  type = "list"
-}
-
-variable "MAC_ADDRESS_worker" {
   type = "list"
 }

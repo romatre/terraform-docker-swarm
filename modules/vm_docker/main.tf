@@ -5,7 +5,14 @@ module "vm_docker" {
   vsphere      = "${var.vsphere}"
   vm           = "${var.vm}"
   IPV4_ADDRESS = "${var.IPV4_ADDRESS}"
-  MAC_ADDRESS  = "${var.MAC_ADDRESS}"
+}
+
+data "template_file" "override_conf" {
+  template = "${file("${path.module}/files/docker.service.d/override.conf")}"
+
+  vars {
+    domain_cluster = "${var.domain_cluster}"
+  }
 }
 
 resource "null_resource" "boot-vm_docker" {
@@ -14,14 +21,20 @@ resource "null_resource" "boot-vm_docker" {
   count = "${length(var.IPV4_ADDRESS)}"
 
   connection {
-    user        = "${var.vsphere["SSH_USER"]}"
-    private_key = "${file("${var.vsphere["SSH_KEY"]}")}"
+    user        = "${var.vm["SSH_USER"]}"
+    private_key = "${file("${var.vm["SSH_KEY"]}")}"
     host        = "${element(var.IPV4_ADDRESS, count.index)}"
   }
 
+  provisioner "remote-exec" {
+    inline = [
+      "mkdir -p /etc/systemd/system/docker.service.d",
+    ]
+  }
+
   provisioner "file" {
-    source      = "${path.module}/files/docker.service.d"
-    destination = "/etc/systemd/system"
+    content     = "${data.template_file.override_conf.rendered}"
+    destination = "/etc/systemd/system/docker.service.d/override.conf"
   }
 
   provisioner "remote-exec" {
@@ -38,5 +51,4 @@ resource "null_resource" "boot-vm_docker" {
   provisioner "remote-exec" {
     script = "${path.module}/files/bootstrap.sh"
   }
-
 }

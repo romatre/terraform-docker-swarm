@@ -3,50 +3,40 @@ vsphere = {
   USER = ""
   PASSWORD = ""
   SERVER = ""
-  SSH_USER = ""
-  SSH_KEY = "resources/ssh_keys/vsphere.pem"
 }
 
 # DOCKER HOST AND CERTS
-host_cluster = "cluster.inf.uniroma3.it"
+domain_cluster = "docker-swarm.menxit.com"
 path_certs = "resources/certs"
 
 # VM HARDWARE SETTINGS
 vm_worker = {
-  FOLDER = ""
-  DEFAULT_GATEWAY = ""
-  DATACENTER = ""
+  SSH_USER = "root"
+  SSH_KEY = "resources/ssh_keys/vsphere.pem"
+  FOLDER = "docker-swarm"
+  DEFAULT_GATEWAY = "192.168.161.1"
+  DATACENTER = "INFORMATICA"
   DATASTORE = "storage-normal"
   TEMPLATE = "docker-swarm/TEMPLATE"
 }
 vm_manager = {
-  FOLDER = ""
-  DEFAULT_GATEWAY = ""
-  DATACENTER = ""
+  SSH_USER = "root"
+  SSH_KEY = "resources/ssh_keys/vsphere.pem"
+  FOLDER = "docker-swarm"
+  DEFAULT_GATEWAY = "192.168.161.1"
+  DATACENTER = "INFORMATICA"
   DATASTORE = "storage-normal"
   TEMPLATE = "docker-swarm/TEMPLATE"
 }
 
 # VM IPV4 ADDRESS
 IPV4_ADDRESS_manager = [
-  "192.178.161.168",
-  "192.188.161.169",
-  "192.128.161.170",
+  "192.168.161.168",
+  "192.168.161.169",
+  "192.168.161.170",
 ]
 IPV4_ADDRESS_worker = [
-  "192.138.161.171",
-  "192.148.161.172",
-  "192.118.161.173",
-]
-
-# VM MAC ADDRESS
-MAC_ADDRESS_manager = [
-  "10:53:56:ab:34:9a",
-  "20:11:56:aa:35:9b",
-  "30:20:56:aa:36:9c",
-]
-MAC_ADDRESS_worker = [
-  "10:50:56:ac:37:9d",
-  "20:40:56:aa:39:9e",
-  "30:60:56:aa:39:9f",
+  "192.168.161.171",
+  "192.168.161.172",
+  "192.168.161.173",
 ]

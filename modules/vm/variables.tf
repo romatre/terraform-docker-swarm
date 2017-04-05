@@ -24,7 +24,3 @@ variable "vm" {
 variable "IPV4_ADDRESS" {
   type = "list"
 }
-
-variable "MAC_ADDRESS" {
-  type = "list"
-}

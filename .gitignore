@@ -4,6 +4,9 @@
 *.backup
 *.lock.info
 .terraform
+*.log
+
+docker.env
 
 resources
 .DS_Store

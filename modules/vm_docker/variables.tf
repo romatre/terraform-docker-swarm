@@ -16,15 +16,15 @@ variable "path_certs" {
   type = "string"
 }
 
+variable "domain_cluster" {
+  type = "string"
+}
+
 variable "name" {
   type    = "string"
   default = "docker"
 }
 
 variable "IPV4_ADDRESS" {
-  type = "list"
-}
-
-variable "MAC_ADDRESS" {
   type = "list"
 }
