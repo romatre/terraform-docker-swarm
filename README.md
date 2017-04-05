@@ -8,8 +8,8 @@ Inoltre occorrerà creare una chiave RSA e aggiungere la chiave pubblica tra que
 successivamente utilizzeranno quel template.
 
 Per generare una chiave RSA:
-```
-ssh-keygen -t rsa -b 4096 -C "docker@vsphere" -f resources/ssh_keys/vsphere
+```bash
+$ ssh-keygen -t rsa -b 4096 -C "docker@vsphere" -f resources/ssh_keys/vsphere
 ```
 
 ## Generazione certificati
@@ -20,8 +20,8 @@ In particolare occorrerà creare un record DNS A che punterà tutti quanti gli i
 
 - SSL_IP: Questo parametro dovrà essere sostituito con l'indirizzo ip del primo manager definito nel file di configurazione.
 
-```
-docker run --rm -e SSL_SUBJECT="docker-swarm.menxit.com" -e SSL_IP="192.168.161.168" -v $(pwd)/resources/certs/:/certs paulczar/omgwtfssl
+```bash
+$ docker run --rm -e SSL_SUBJECT="docker-swarm.menxit.com" -e SSL_IP="192.168.161.168" -v $(pwd)/resources/certs/:/certs paulczar/omgwtfssl
 ```
 
 ## Configurazione
@@ -29,30 +29,30 @@ A questo punto occorrerà creare un file denominato variables.tfvars e configura
 
 ## Deploy
 Per deployare basta eseguire il comando:
-```
-make apply
+```bash
+$ make apply
 ```
 ## Connettersi da remoto allo Swarm
 Si realizza un file denominato docker.env.
 Al posto di dominio_cluster si inserisce il valore della variabile domain_cluster.
 
-```
+```bash
 export DOCKER_HOST=tcp://docker-swarm.menxit.com:2376
 export DOCKER_CERT_PATH=$(pwd)/resources/certs
 export DOCKER_TLS_VERIFY=1
 ```
 
 A questo punto per connettersi allo swarm basterà:
-```
-eval $(cat docker.env)
+```bash
+$ eval $(cat docker.env)
 ```
 
 ## Deployare il registry (opzionale)
 Per deployare un registry privato:
 
 1) Connettersi allo swarm:
-```
-eval $(cat docker.env)
+```bash
+$ eval $(cat docker.env)
 ```
 
 2) ./services/registry/deploy.sh
@@ -66,22 +66,22 @@ Aprire il docker-compose.yml e fare un search and replace della stringa "docker-
 dominio.
 
 A questo punto occorrerà connettersi allo swarm remoto:
-```
-eval $(cat docker.env)
+```bash
+$ eval $(cat docker.env)
 ```
 
 Per buildare le immagini usate nel progetto basta lanciare il seguente comando:
-```
+```bash
 $ docker-compose build
 ```
 
 Per pushare le immagini buildate nel registry privato:
-```
+```bash
 $ docker-compose push
 ```
 
 Per deployare:
-```
+```bash
 $ docker stack deploy --compose-file docker-compose.yml sentence-alt
 ```
 
@@ -89,16 +89,16 @@ $ docker stack deploy --compose-file docker-compose.yml sentence-alt
 Per deployare un web server nginx sulla porta:
 
 1) Connettersi allo swarm:
-```
+```bash
 eval $(cat docker.env)
 ```
 
 2) Creare il servizio:
-```
+```bash
 docker service create -p3000:80 nginx
 ```
 
 3) Accedi al web server:
-```
+```bash
 curl http://docker-swarm.menxit.com:3000
 ```
