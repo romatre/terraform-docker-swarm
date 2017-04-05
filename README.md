@@ -90,15 +90,15 @@ Per deployare un web server nginx sulla porta:
 
 1) Connettersi allo swarm:
 ```bash
-eval $(cat docker.env)
+$ eval $(cat docker.env)
 ```
 
 2) Creare il servizio:
 ```bash
-docker service create -p3000:80 nginx
+$ docker service create -p3000:80 nginx
 ```
 
 3) Accedi al web server:
 ```bash
-curl http://docker-swarm.menxit.com:3000
+$ curl http://docker-swarm.menxit.com:3000
 ```
