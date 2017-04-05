@@ -15,7 +15,7 @@ ssh-keygen -t rsa -b 4096 -C "docker@vsphere" -f resources/ssh_keys/vsphere
 ## Generazione certificati
 Occorrerà generare anche dei certificati SSL che permetteranno di collegarsi in modalità remota allo Swarm.
 
-- SSL_SUBJECT: Questo parametro dovrò essere sostituito con il dominio al quale si vuole associare lo swarm.
+- SSL_SUBJECT: Questo parametro dovrà essere sostituito con il dominio al quale si vuole associare lo swarm.
 In particolare occorrerà creare un record DNS A che punterà tutti quanti gli indirizzi ip dei nodi manager attivi.
 
 - SSL_IP: Questo parametro dovrà essere sostituito con l'indirizzo ip del primo manager definito nel file di configurazione.
