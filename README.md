@@ -57,7 +57,7 @@ eval $(cat docker.env)
 
 2) ./services/registry/deploy.sh
 
-## Deployare un'immagine privata
+## Deployare un'immagine privata (opzionale)
 Una volta deployato il registry privato è possibile pusharci sopra immagini private.
 In particolare in services/d-sentence-swarm-zuul è possibile trovare un'applicazione basata su 3 microservizi basati
 su Spring.
