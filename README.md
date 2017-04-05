@@ -1,5 +1,5 @@
 # Docker Swarm Cluster su VMware VSphere
-Questo progetto permette di deployare su VMware VSphere usando Terraform un cluster basato su Docker Swarm.
+Questo progetto permette di deployare un cluster basato su Docker Swarm su VMware VSphere usando Terraform.
 
 ## Crea un template
 In primo luogo occorrerà realizzare un template di partenza basato su Ubuntu 16.10.
