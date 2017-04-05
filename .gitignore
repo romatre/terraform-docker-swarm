@@ -3,6 +3,7 @@
 *.tfbackup
 *.backup
 *.lock.info
+.terraform
 
 resources
 .DS_Store

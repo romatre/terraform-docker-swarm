@@ -14,6 +14,6 @@ module "cluster" {
   IPV4_ADDRESS_manager = "${var.IPV4_ADDRESS_manager}"
   MAC_ADDRESS_manager  = "${var.MAC_ADDRESS_manager}"
 
-  IPV4_ADDRESS_worker = "${var.IPV4_ADDRESS_manager}"
-  MAC_ADDRESS_worker  = "${var.MAC_ADDRESS_manager}"
+  IPV4_ADDRESS_worker = "${var.IPV4_ADDRESS_worker}"
+  MAC_ADDRESS_worker  = "${var.MAC_ADDRESS_worker}"
 }
