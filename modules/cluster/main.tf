@@ -65,6 +65,8 @@ resource "null_resource" "join_manager" {
 resource "null_resource" "join_worker" {
   depends_on = ["module.worker", "null_resource.init"]
 
+  count = "${length(var.IPV4_ADDRESS_worker)}"
+
   connection {
     user        = "${var.vm_worker["SSH_USER"]}"
     private_key = "${file("${var.vm_worker["SSH_KEY"]}")}"

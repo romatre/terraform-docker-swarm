@@ -19,9 +19,11 @@ Occorrerà generare anche dei certificati SSL che permetteranno di collegarsi in
 In particolare occorrerà creare un record DNS A che punterà tutti quanti gli indirizzi ip dei nodi manager attivi.
 
 - SSL_IP: Questo parametro dovrà essere sostituito con l'indirizzo ip del primo manager definito nel file di configurazione.
+Questo parametro è necessario in quanto in fase di provisioning i manager e i worker dovranno fare il join sul nodo master
+e avranno necessità di utilizzare l'indirizzo ip per connettersi ad esso e prelevare il token segreto.
 
 ```bash
-$ docker run --rm -e SSL_SUBJECT="docker-swarm.menxit.com" -e SSL_IP="192.168.161.168" -v $(pwd)/resources/certs/:/certs paulczar/omgwtfssl
+$ docker run --rm -e SSL_SUBJECT="docker-swarm.inf.uniroma3.it" -e SSL_IP="192.168.161.168" -v $(pwd)/resources/certs/:/certs paulczar/omgwtfssl
 ```
 
 ## Configurazione
@@ -37,7 +39,7 @@ Si realizza un file denominato docker.env.
 Al posto di dominio_cluster si inserisce il valore della variabile domain_cluster.
 
 ```bash
-export DOCKER_HOST=tcp://docker-swarm.menxit.com:2376
+export DOCKER_HOST=tcp://docker-swarm.inf.uniroma3.it:2376
 export DOCKER_CERT_PATH=$(pwd)/resources/certs
 export DOCKER_TLS_VERIFY=1
 ```
@@ -55,19 +57,32 @@ Per deployare un registry privato:
 $ eval $(cat docker.env)
 ```
 
-2) ./services/registry/deploy.sh
+2) Entrare nella cartella services/registry
+```bash
+$ cd services/registry
+```
+
+3) Deployare il registry
+```bash
+$ ./deploy.sh
+```
 
 ## Deployare un'immagine privata (opzionale)
 Una volta deployato il registry privato è possibile pusharci sopra immagini private.
 In particolare in services/d-sentence-swarm-zuul è possibile trovare un'applicazione basata su 3 microservizi basati
 su Spring.
 
-Aprire il docker-compose.yml e fare un search and replace della stringa "docker-swarm.menxit.com:5000" con il proprio
+Aprire il docker-compose.yml e fare un search and replace della stringa "docker-swarm.inf.uniroma3.it:5000" con il proprio
 dominio.
 
 A questo punto occorrerà connettersi allo swarm remoto:
 ```bash
 $ eval $(cat docker.env)
+```
+
+Entrare nella cartella services/d-sentence-swarm-zuul:
+```bash
+$ cd services/d-sentence-swarm-zuul
 ```
 
 Per buildare le immagini usate nel progetto basta lanciare il seguente comando:
@@ -82,7 +97,7 @@ $ docker-compose push
 
 Per deployare:
 ```bash
-$ docker stack deploy --compose-file docker-compose.yml sentence-alt
+$ ./deploy.sh
 ```
 
 ## Deployare nginx (opzionale)
@@ -100,5 +115,5 @@ $ docker service create -p3000:80 nginx
 
 3) Accedi al web server:
 ```bash
-$ curl http://docker-swarm.menxit.com:3000
+$ curl http://docker-swarm.inf.uniroma3.it:3000
 ```
