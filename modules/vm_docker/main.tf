@@ -28,7 +28,7 @@ resource "null_resource" "boot-vm_docker" {
 
   provisioner "remote-exec" {
     inline = [
-      "echo  \"${element(var.IPV4_ADDRESS, count.index)} ${var.domain_cluster} >> /etc/hosts\"",
+      "echo  \"${element(var.IPV4_ADDRESS, count.index)} ${var.domain_cluster}\" >> /etc/hosts",
     ]
   }
 
