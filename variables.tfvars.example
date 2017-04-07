@@ -6,7 +6,7 @@ vsphere = {
 }
 
 # DOCKER HOST AND CERTS
-domain_cluster = "docker-swarm.inf.uniroma3.it"
+domain_cluster = "swarm.inf.uniroma3.it"
 path_certs = "resources/certs"
 
 # VM HARDWARE SETTINGS

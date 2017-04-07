@@ -23,7 +23,7 @@ Questo parametro è necessario in quanto in fase di provisioning i manager e i w
 e avranno necessità di utilizzare l'indirizzo ip per connettersi ad esso e prelevare il token segreto.
 
 ```bash
-$ docker run --rm -e SSL_SUBJECT="docker-swarm.inf.uniroma3.it" -e SSL_IP="192.168.161.168" -v $(pwd)/resources/certs/:/certs paulczar/omgwtfssl
+$ docker run --rm -e SSL_SUBJECT="swarm.inf.uniroma3.it" -e SSL_IP="192.168.161.168" -v $(pwd)/resources/certs/:/certs paulczar/omgwtfssl
 ```
 
 ## Configurazione
@@ -39,7 +39,7 @@ Si realizza un file denominato docker.env.
 Al posto di dominio_cluster si inserisce il valore della variabile domain_cluster.
 
 ```bash
-export DOCKER_HOST=tcp://docker-swarm.inf.uniroma3.it:2376
+export DOCKER_HOST=tcp://swarm.inf.uniroma3.it:2376
 export DOCKER_CERT_PATH=$(pwd)/resources/certs
 export DOCKER_TLS_VERIFY=1
 ```
@@ -72,7 +72,7 @@ Una volta deployato il registry privato è possibile pusharci sopra immagini pri
 In particolare in services/d-sentence-swarm-zuul è possibile trovare un'applicazione basata su 3 microservizi basati
 su Spring.
 
-Aprire il docker-compose.yml e fare un search and replace della stringa "docker-swarm.inf.uniroma3.it:5000" con il proprio
+Aprire il docker-compose.yml e fare un search and replace della stringa "swarm.inf.uniroma3.it:5000" con il proprio
 dominio.
 
 A questo punto occorrerà connettersi allo swarm remoto:
@@ -115,5 +115,5 @@ $ docker service create -p3000:80 nginx
 
 3) Accedi al web server:
 ```bash
-$ curl http://docker-swarm.inf.uniroma3.it:3000
+$ curl http://swarm.inf.uniroma3.it:3000
 ```

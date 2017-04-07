@@ -12,7 +12,7 @@ resource "vsphere_virtual_machine" "vm" {
   datacenter = "${var.vm["DATACENTER"]}"
   vcpu       = "${var.vm["VCPU"]}"
   memory     = "${var.vm["MEMORY"]}"
-  domain     = "docker-swarm"
+  memory_reservation = 1024
 
   network_interface {
     label              = "VM Network"

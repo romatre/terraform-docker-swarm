@@ -1,31 +1,31 @@
 version: '3'
 services:
   subject:
-    image: docker-swarm.inf.uniroma3.it:5000/word-img-alt:latest
+    image: swarm.inf.uniroma3.it:5000/word-img-alt:latest
     build: ./images/word-service
     deploy:
       mode: replicated
       replicas: 1    
   verb:
-    image: docker-swarm.inf.uniroma3.it:5000/word-img-alt:latest
+    image: swarm.inf.uniroma3.it:5000/word-img-alt:latest
     build: ./images/word-service
     deploy:
       mode: replicated
       replicas: 1    
   object:
-    image: docker-swarm.inf.uniroma3.it:5000/word-img-alt:latest
+    image: swarm.inf.uniroma3.it:5000/word-img-alt:latest
     build: ./images/word-service
     deploy:
       mode: replicated
       replicas: 1    
   sentence:
-    image: docker-swarm.inf.uniroma3.it:5000/sentence-img-alt:latest
+    image: swarm.inf.uniroma3.it:5000/sentence-img-alt:latest
     build: ./images/sentence-service
     deploy:
       mode: replicated
       replicas: 2    
   zuul:
-    image: docker-swarm.inf.uniroma3.it:5000/sentence-zuul-img-alt:latest
+    image: swarm.inf.uniroma3.it:5000/sentence-zuul-img-alt:latest
     build: ./images/zuul
     ports:
     - "8080:8080"
